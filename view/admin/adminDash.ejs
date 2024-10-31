@@ -1,0 +1,201 @@
+
+<% include('../layouts/header.ejs') %>
+
+<!-- <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+    .container {
+        padding: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .create-user-btn, .logout-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+    .logout-btn {
+        background-color: #dc3545;
+    }
+    .create-user-btn:hover, .logout-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Admin Dashboard</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Verified</th>
+                <th>Actions</th>
+
+                <% if (users.length > 0) { %>
+                    <% for (let i = 0; i < users.length; i++) { %>
+                        <tr>
+                            <td><%= users[i].name %></td>
+                            <td><%= users[i].email %></td>
+                            <td><%= users[i].mobile %></td>
+                            <td>
+                                <% if (users[i].is_verified === 0) { %>
+                                    <p>Not verified</p>
+                                <% } else { %>
+                                    <p>Verified</p>
+                                <% } %>
+                            </td>
+                            <td>
+                                <a href="/admin/edit-user?id=<%= users[i]._id %>">Edit</a>
+                                <a href="/admin/delete-user?id=<%= users[i]._id %>">Delete</a>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5">User Not Found</td>
+                    </tr>
+                <% } %>
+                    
+            </tr>
+        </thead>
+        
+    </table>
+
+    <a href="/create-user" class="create-user-btn">Create User</a>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div> -->
+
+<style>
+    /* CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+    .container {
+        padding: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .action-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        text-decoration: none;
+        margin-right: 5px;
+    }
+    .create-btn {
+        background-color: green;
+    }
+    .delete-btn {
+        background-color: #dc3545;
+    }
+    .action-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Admin Dashboard</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <!-- <th>User ID</th> -->
+                <th>Username</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <!-- <th>Verified</th> -->
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (users.length > 0) { %>
+                <% for (let i = 0; i < users.length; i++) { %>
+                    <tr>
+                        <td><%= users[i].name %></td>
+                        <td><%= users[i].email %></td>
+                        <td><%= users[i].mobile %></td>
+                        <!-- <td>
+                            <% if (users[i].is_verified === 0) { %>
+                                <p>Not verified</p>
+                            <% } else { %>
+                                <p>Verified</p>
+                            <% } %>
+                        </td> -->
+                        <td>
+                            <button class="action-btn" onclick="editUser('<%= users[i]._id %>')">Edit</button>
+                            <button class="action-btn delete-btn" onclick="deleteUser('<%= users[i]._id %>')">Delete</button>
+
+                        </td>
+                    </tr>
+                <% } %>
+            <% } else { %>
+                <tr>
+                    <td colspan="5">User Not Found</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <a href="/admin/create" class="action-btn create-btn ">Create User</a>
+    <a href="/logout" class="action-btn">Logout</a>
+</div>
+
+<script>
+
+    function editUser(userId) {
+        window.location.href = "/admin/edit?id=" + userId;
+    }
+
+    function deleteUser(userId) {
+    console.log("Delete user with ID: " + userId);
+    window.location.href = "/admin/delete?id=" + userId;
+}
+
+</script>
+
+<% include('../layouts/footer.ejs') %>

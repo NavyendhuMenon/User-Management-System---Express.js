@@ -1,0 +1,94 @@
+<% include('../layouts/header.ejs') %>
+
+  <style>
+    /* CSS styles */
+    body {
+        font-family: 'Roboto', sans-serif; /* Change 'Roboto' to the desired font */
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    h1 {
+        font-size: 24px;
+        color: #0078d4;
+        text-align: center;
+    }
+
+    .container {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box; /* Ensure padding and border don't increase the element's width */
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #0078d4;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s; /* Smooth transition */
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    p.error {
+        color: #fb0d0d;
+        margin-bottom: 10px;
+    }
+
+    a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        color: #0078d4;
+        margin-top: 20px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+  
+  <h1>Edit User</h1>
+  
+  
+  <div class="container">
+   <% if(locals.user){%>
+
+    <form action="/admin/edit?id=<%=user._id%>" method="post">
+      <input type="text" name="name" placeholder="Enter Name" value="<%=user.name%>" required><br>
+      <input type="email" name="email" placeholder="Enter Email" value="<%=user.email%>" required><br>
+      <input type="text" name="mno" placeholder="Enter Mobile" value="<%=user.mobile%>" required><br>
+      <input type="submit" value="Update User">
+    </form>
+ <% } %>
+  
+    <% if (typeof message !== 'undefined') { %>
+      <p class="error"><%= message %></p>
+    <% } %>
+  </div>
+  
+  <a href="adminhome">Back</a>
+
+
+  
+  <% include('../layouts/footer.ejs') %>
